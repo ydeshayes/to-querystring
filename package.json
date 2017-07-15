@@ -1,6 +1,6 @@
 {
   "name": "to-querystring",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple function that convert js object and array to a queryString",
   "main": "lib/to-querystring.min.js",
   "scripts": {
