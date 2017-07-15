@@ -1,6 +1,6 @@
 const objectToQueryString = (key, value) => `${key}=${encodeURIComponent(value)}`;
 
-const arrayToQueryString = (key, values) => values.map(value => `${key}=${encodeURIComponent(value)}`).join('&');
+const arrayToQueryString = (key, values) => values.map(value => objectToQueryString(key, value)).join('&');
 
 export default params => {
   const paramsStringArray = Object.keys(params)
