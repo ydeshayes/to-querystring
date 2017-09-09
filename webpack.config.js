@@ -14,7 +14,7 @@ if (env.mode === 'build') {
   outputFile = libraryName + '.js';
 }
 
-var config = {
+const config = {
   entry: __dirname + '/src/index.js',
   output: {
     path: __dirname + '/lib',
@@ -32,7 +32,7 @@ var config = {
       },
       {
         test: /(\.js)$/,
-        use: "eslint-loader",
+        use: 'eslint-loader',
         exclude: /node_modules/
       }
     ]
