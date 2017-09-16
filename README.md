@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ydeshayes/to-querystring.svg)](https://travis-ci.org/ydeshayes/to-querystring)
+
 # to-querystring function
 
 Simple function that convert js object and array to a queryString.
