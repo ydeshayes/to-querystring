@@ -15,14 +15,22 @@ function arrayToQueryString(key, values, queryString) {
   return values.map(value => keyValueToQueryString(key, value, queryString)).join('&');
 }
 
-function objectToQueryString(params, queryString = '') {
-  const paramsStringArray = Object.keys(params)
-    .filter(key => params[key] !== undefined)// Can be 0
-    .map(key =>
-      (params[key] && Array.isArray(params[key]))
-        ? arrayToQueryString(key, params[key], queryString)
-        : keyValueToQueryString(key, params[key], queryString));
-
+function objectToQueryString(params, queryString = '', options = {}) {
+  const arrayPrefix = options.arrayPrefix || '';
+  let paramsStringArray = [];
+  
+  if(Array.isArray(params)) {
+    paramsStringArray = params.map((value, index) => {
+      return keyValueToQueryString(`${index}${arrayPrefix}`, value, queryString);
+    });
+  } else {
+    paramsStringArray = Object.keys(params)
+      .filter(key => params[key] !== undefined)// Can be 0
+      .map(key =>
+        (params[key] && Array.isArray(params[key]))
+          ? arrayToQueryString(`${key}${arrayPrefix}`, params[key], queryString)
+          : keyValueToQueryString(key, params[key], queryString));
+  }
   return paramsStringArray.join('&').replace(/%20/g, '+');
 };
 
