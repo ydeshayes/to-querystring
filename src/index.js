@@ -18,8 +18,8 @@ function arrayToQueryString(key, values, queryString) {
 function objectToQueryString(params, queryString = '', options = {}) {
   const arrayPrefix = options.arrayPrefix || '';
   let paramsStringArray = [];
-  
-  if(Array.isArray(params)) {
+
+  if (Array.isArray(params)) {
     paramsStringArray = params.map((value, index) => {
       return keyValueToQueryString(`${index}${arrayPrefix}`, value, queryString);
     });
