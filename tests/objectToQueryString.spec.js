@@ -99,7 +99,7 @@ describe('object-to-querystring tests', () => {
     });
 
     expect(queryString).to.equal(
-      'test[deep][deep3]=testValueDeep&test[deep][test2]=a&test[deep][test2]=b&test[deep][test2]=c&test[deep2]=testd&test2[][deep]=testDeepInArray&test2[][deep2]=testDeepInArray2&test2[]=b&test2[]=c&test3=testValue2'// eslint-disable-line
+      'test[deep][deep3]=testValueDeep&test[deep][test2][]=a&test[deep][test2][]=b&test[deep][test2][]=c&test[deep2]=testd&test2[][deep]=testDeepInArray&test2[][deep2]=testDeepInArray2&test2[]=b&test2[]=c&test3=testValue2'// eslint-disable-line
     );
   });
 
@@ -113,7 +113,14 @@ describe('object-to-querystring tests', () => {
     const queryString = toQueryString(['a', 'b'], '', {
       arrayPrefix: '[]'
     });
-
     expect(queryString).to.equal('0[]=a&1[]=b');
+  });
+  
+  it('Convert array in object to query string with prefix options', () => {
+    const queryString = toQueryString({'test': { 'array1': ['a', 'b'] }}, '', {
+      arrayPrefix: '[]'
+    });
+
+    expect(queryString).to.equal('test[array1][]=a&test[array1][]=b');
   });
 });
