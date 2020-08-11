@@ -1,6 +1,6 @@
 {
   "name": "to-querystring",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Simple function that convert js object and array to a queryString",
   "main": "lib/to-querystring.min.js",
   "scripts": {
@@ -25,9 +25,9 @@
   },
   "keywords": [
     "fetch",
-	  "queryString"
+    "queryString"
   ],
-    "repository": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/ydeshayes/to-querystring.git"
   },
