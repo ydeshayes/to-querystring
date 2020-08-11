@@ -16,7 +16,7 @@
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.24.1",
     "chai": "^4.1.0",
-    "eslint": "3.16.1",
+    "eslint": "4.18.2",
     "eslint-loader": "1.6.3",
     "jsdom": "^9.6.0",
     "mocha": "^3.4.2",
