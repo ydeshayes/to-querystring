@@ -1,34 +1,38 @@
 var webpack = require('webpack');
-var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const ESLintPlugin = require('eslint-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 var path = require('path');
 var env = require('yargs').argv.env;
 
-var libraryName = 'to-querystring';
+let libraryName = 'to-querystring';
+let plugins = [new ESLintPlugin()], outputFile;
+let optimization = {
+  minimize: true,
+  minimizer: [new TerserPlugin()],
+}; 
 
-var plugins = [], outputFile;
-
-if (env.mode === 'build') {
-  plugins.push(new UglifyJsPlugin({ minimize: true }));
+if (process.env.NODE_ENV === 'production') {
   outputFile = libraryName + '.min.js';
 } else {
   outputFile = libraryName + '.js';
 }
 
 const config = {
-  entry: __dirname + '/src/index.js',
+  entry: __dirname + '/src/index.ts',
   output: {
     path: __dirname + '/lib',
     filename: outputFile,
     library: libraryName,
     libraryTarget: 'umd',
-    umdNamedDefine: true
+    umdNamedDefine: true,
+    globalObject: 'this'
   },
   module: {
     rules: [
       {
-        test: /(\.js)$/,
+        test: /(\.ts|\.js)$/,
         use: 'babel-loader',
-        exclude: /(node_modules|bower_components)/
+        exclude: /(node_modules)/
       },
       {
         test: /(\.js)$/,
@@ -41,8 +45,9 @@ const config = {
     modules: [
       path.resolve('./src')
     ],
-    extensions: ['.js']
+    extensions: ['.js', '.ts']
   },
+  optimization,
   plugins: plugins
 };
 
