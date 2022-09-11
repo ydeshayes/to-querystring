@@ -12,6 +12,14 @@ describe('object-to-querystring tests', () => {
 
     expect(queryString).to.equal('test=testValue');
   });
+
+  it('Convert simple object with a number to query string', () => {
+    const queryString = toQueryString({
+      'test': 1
+    });
+
+    expect(queryString).to.equal('test=1');
+  });
   
   it('Convert simple object with array to query string with options', () => {
     const queryString = toQueryString({
@@ -122,5 +130,35 @@ describe('object-to-querystring tests', () => {
     });
 
     expect(queryString).to.equal('test[array1][]=a&test[array1][]=b');
+  });
+
+  it('Gracefully fail with a string', () => {
+    const queryString = toQueryString("test");
+
+    expect(queryString).to.equal('0=t&1=e&2=s&3=t');
+  });
+
+  it('Gracefully fail with a number', () => {
+    const queryString = toQueryString(1);
+
+    expect(queryString).to.equal('');
+  });
+
+  it('Gracefully fail with a boolean', () => {
+    const queryString = toQueryString(true);
+
+    expect(queryString).to.equal('');
+  });
+
+  it('Gracefully fail with an empty object', () => {
+    const queryString = toQueryString({});
+
+    expect(queryString).to.equal('');
+  });
+
+  it('Gracefully fail with an empty array', () => {
+    const queryString = toQueryString([]);
+
+    expect(queryString).to.equal('');
   });
 });
