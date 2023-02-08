@@ -2,8 +2,8 @@ export type Options = {
   arrayPrefix?: string
 };
 
-type Param = string | number | boolean | object | Array<Param>;
-type Params = Array<Param> | Record<string, Param>;
+export type Param = string | number | boolean | object | Array<Param>;
+export type Params = Array<Param> | Record<string, Param>;
 
 // Bundle size optimisation
 const euc = encodeURIComponent;
